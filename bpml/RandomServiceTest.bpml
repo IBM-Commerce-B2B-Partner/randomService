@@ -1,0 +1,27 @@
+<process name="RandomServiceTest">
+<sequence name="main">
+<operation>
+ <participant name="RandomService"/>
+ <output message="Xout">
+  <assign to="." from="*"></assign>
+ </output>
+ <input message="Xin">
+  <assign to="FirstResult" from="*"></assign>
+ </input>
+</operation>
+<operation>
+ <participant name="RandomService"/>
+ <output message="Xout">
+  <assign to="." from="*"></assign>
+  <assign to="seed">20</assign>
+  <assign to="returnType">FLOAT</assign>
+ </output>
+ <input message="Xin">
+  <assign to="SecondResult" from="*"></assign>
+ </input>
+</operation>
+</sequence>
+</process>
+
+
+

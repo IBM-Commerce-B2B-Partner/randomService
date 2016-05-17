@@ -1,0 +1,57 @@
+<project name="RandomService" default="dist" basedir=".">
+  <description>
+    build a sample Service
+  </description>
+  <!-- set global properties for this build -->
+  <property name="ServiceName" value="RandomService" />
+  <property name="src" location="prod/src"/>
+  <property name="build" location="build"/>
+  <property name="dist" location="${ServiceName}/${ServiceName}"/>
+  <property name="codejar" location="jars/${ServiceName}/1_0"/>
+
+<path id="build.classpath">
+   <fileset dir="../install">
+     <include name="**/*.jar" />
+   </fileset>
+</path>
+
+  <target name="init">
+    <tstamp/>
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init" >
+    <javac srcdir="${src}" destdir="${build}" source="1.7" target="1.7" classpathref="build.classpath">
+    </javac>
+  </target>
+
+  <target name="serviceJar" depends="compile" >
+    <mkdir dir="${codejar}"/>
+    <jar jarfile="${codejar}/${ServiceName}-${DSTAMP}.jar" basedir="${build}"/>
+  </target>
+
+  <target name="dist" depends="serviceJar" >
+    <mkdir dir="${dist}"/>
+    <mkdir dir="${dist}/jars"/>
+    <copy file="${codejar}/${ServiceName}-${DSTAMP}.jar" todir="${dist}/jars/${ServiceName}/1_0" />
+    <copy file="serviceinstances.xml" todir="${dist}" />
+    <mkdir dir="${dist}/servicedefs" />
+    <copy file="servicedefs/${ServiceName}.xml" todir="${dist}/servicedefs" />
+    <copy todir="${dist}/files/properties" >
+       <fileset dir="files/properties" />
+    </copy>
+    <copy todir="${dist}/bpml" >
+       <fileset dir="bpml" />
+    </copy>
+
+    <jar jarfile="${ServiceName}.jar" basedir="${ServiceName}"/>
+  </target>
+
+  <target name="clean"
+        description="clean up">
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${codejar}"/>
+    <delete dir="${dist}" />
+  </target>
+</project>

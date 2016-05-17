@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SERVICES>
+<SERVICE name="RandomService"
+	 description="RandomService.description"
+	 label="RandomService.label"
+	 implementationType="CLASS"
+	 JNDIName="com.customer.RandomService"
+	 type="BASIC"
+	 adapterType="N/A"
+	 adapterClass="N/A"
+	 version="1.3"
+	 SystemService="NO">
+	 <!-- 
+	      The Service Definition File contains 3 Sections:
+	      global, instance and wfd.
+	      This reflect on which layer the parameters are defined
+
+	      global is a global setting for all instances of this type
+	      of service. You configure them in the dashboard under
+	      Deployment->Services->Installation/Setup
+
+	      instance id a setting sepecific to one instance of this
+	      service. You configure this in the dashboard under
+	      Deployment->Services->Configuration
+
+	      wfd describes a set of parameters that you can only set during
+	      runtime of the process
+	      -->
+ <VARS type="global">
+ </VARS>
+ <VARS type="instance">
+	 <GROUP title="Random Parameters" instructions="randomparameters.description">
+		 <VARDEF varname="seed" type="String" htmlType="text" validator="NUMBER" size="10" maxsize="10" defaultVal="5" label="RandomService.label.seed" />
+		 <VARDEF varname="returnType" type="String" htmlType="select" defaultVal="Long" options="RandomReturnType" validator="ALPHANUMERIC" size="10" maxsize="10" label="RandomService.label.returnType" />
+	 </GROUP>
+ </VARS>
+ <VARS type="wfd">
+  </VARS>
+</SERVICE>
+
+<OPTION name="RandomReturnType">
+   <ELE value="DOUBLE" displayname="randomService.randomType.double"/>   
+   <ELE value="FLOAT" displayname="randomService.randomType.float"/>   
+   <ELE value="INT" displayname="randomService.randomType.int"/>   
+   <ELE value="LONG" displayname="randomService.randomType.long"/>   
+</OPTION>
+
+
+</SERVICES>

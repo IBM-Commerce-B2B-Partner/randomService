@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services>
+<service parentdefname="RandomService" name="RandomService"
+         displayname="RandomService"
+         description="Generates a Random Number"
+         targetenv="all"
+         activestatus="1"
+         systemservice="0"
+         parentdefid="-1">
+         <parm name="seed" value="10" />
+</service>
+</services>
